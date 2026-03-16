@@ -1,0 +1,3 @@
+# Wstęp {.unnumbered}
+
+To jest szablon pracy dyplomowej Uniwersytetu Ekonomicznego w Poznaniu przygotowany w systemie Quarto. Proszę zastąpić tę treść wstępem do pracy.

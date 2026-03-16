@@ -1,0 +1,77 @@
+%%% Custom UEP Title Page %%%
+%%% Based on Załącznik nr 1 & 2 to Zarządzenie nr 92/2021 Rektora UEP %%%
+\makeatletter
+\begin{titlepage}
+
+\clearpage
+
+\AddToShipoutPicture*{%
+  \AtPageUpperLeft{%
+    \raisebox{-\height}{\includegraphics[width=\paperwidth]{images/headerUEP.jpg}}
+  }
+}
+
+\vspace*{1.85cm}
+
+\begin{center}
+{\Large \bfseries\@author\unskip\strut\par}
+\end{center}
+
+\vspace{0.8cm}
+
+%%%%%%%%% TYTUŁ PRACY / THESIS TITLE %%%%%%%%%
+%%% PL: tytuł polski, potem angielski
+%%% EN: tytuł angielski, potem polski
+
+\iflanguage{polish}{%
+  \begin{adjustwidth}{2.86cm}{}
+  {\Large \@title\par}
+  \vspace{1.2cm}
+  \noindent
+  {\Large \uepTitleEN\par}
+  \end{adjustwidth}
+}{%
+  \begin{adjustwidth}{2.86cm}{}
+  {\Large \uepTitleEN\par}
+  \vspace{1.2cm}
+  \noindent
+  {\Large \@title\par}
+  \end{adjustwidth}
+}
+
+\vspace{3.2cm}
+
+\begin{center}
+{\small \bfseries\uepThesisType}
+\end{center}
+
+\vspace{1.65cm}
+
+%%%%%%%%% PROMOTOR / THESIS SUPERVISOR %%%%%%%%%
+
+\begin{adjustwidth}{9.38cm}{}
+\iflanguage{polish}{%
+  {\small Promotor: \uepSupervisor}\par
+}{%
+  {\small Thesis Supervisor: \uepSupervisor}\par
+}
+\end{adjustwidth}
+
+\vfill
+
+\begin{flushleft}
+\iflanguage{polish}{%
+  {\small Kierunek: \uepMajor\unskip\strut\par}
+}{%
+  {\small Programme: \uepMajor\unskip\strut\par}
+}
+\end{flushleft}
+
+\vspace{0.3cm}
+
+\begin{center}
+{\small Poznań \the\year\par}
+\end{center}
+
+\end{titlepage}
+\makeatother

@@ -1,0 +1,66 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Zmiana struktury kosztów jako środek do modyfikacji modelu biznesowego"
+  author: "Anna Kowalska"
+  date: today
+  # ──── NAZWA PLIKU / OUTPUT FILENAME ────
+  # Format: nazwiskoNIUtyp (np. kowalska1234lic, kowalska1234mgr)
+  # Proszę zmienić na swoje dane / Please change to your data
+  output-file: "kowalska1234lic"
+  chapters:
+    - index.qmd
+    - rozdzial1.qmd
+    - rozdzial2.qmd
+
+# ──── KONFIGURACJA PRACY / THESIS CONFIGURATION ────
+# Proszę uzupełnić poniższe pola / Please fill in the fields below
+
+title-en: "Changing the cost structure as a means to modify the business model"
+
+# Rodzaj pracy / Thesis type:
+#   PL: "Praca licencjacka" / "Praca inżynierska" / "Praca magisterska"
+#   EN: "Bachelor's thesis" / "Engineer's thesis" / "Master's thesis"
+thesis-type: "Praca licencjacka"
+
+supervisor: "dr M. Nowak"
+
+# Kierunek / Programme
+major: "Zarządzanie"
+
+# Język pracy / Thesis language: pl or en
+lang: pl
+
+# ──── FORMAT PDF ────
+
+format:
+  pdf:
+    documentclass: report
+    classoption: [12pt, a4paper]
+    pdf-engine: xelatex
+    cite-method: biblatex
+    biblatexoptions: [style=apa, backend=biber, alldates=year]
+    include-in-header: preamble.tex
+    include-before-body: before-body.tex
+    filters:
+      - title-page.lua
+    geometry:
+      - top=2.5cm
+      - bottom=2.5cm
+      - left=3cm
+      - right=2cm
+    linestretch: 1.5
+    fontsize: 12pt
+    toc: false
+    lof: true
+    lot: true
+    number-sections: true
+
+bibliography: bibliografia.bib
+
+# Knitr: cairo_pdf for proper Polish characters in R plots
+knitr:
+  opts_chunk:
+    dev: cairo_pdf

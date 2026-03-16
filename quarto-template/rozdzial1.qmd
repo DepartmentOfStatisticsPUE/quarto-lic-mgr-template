@@ -1,0 +1,56 @@
+# Zarządzanie
+
+Zarządzanie -- ogólny zakres działań, procesów i decyzji, których zastosowanie w odniesieniu do zasobów, osób, kapitału lub organizacji ma zapewnić warunki do efektywnego ich funkcjonowania prowadzącego do osiągnięcia postawionych celów. \cite{French2010, Shotton1999, Shotton1989}
+
+Poniższe równanie (@eq-przyklad) przedstawia przykładową formułę matematyczną:
+
+$$
+\sqrt{x^2+1}
+$$ {#eq-przyklad}
+
+Od początku XX wieku, odkąd zarządzanie próbowano oprzeć na naukowych podstawach, aż do lat 60. XX wieku zarządzanie pojmowane było jako działanie kierownicze, obejmujące następujące sekwencje postępowania: planowanie, organizowanie, decydowanie, motywowanie i kontrolowanie, nazywane klasycznymi funkcjami zarządzania. \cite[123--126]{Lassen2006}
+
+Klasyczne funkcje zarządzania wyróżnił pierwszy „klasyk" zarządzania Henri Fayol. Jednakże paradygmat zarządzania zmienił się od tego czasu radykalnie, więc warto powrócić do starszej, bardziej ogólnej definicji \textcite[610]{Porter1981} twierdz: zarządzanie to sztuka bądź praktyka rozumnego stosowania środków dla osiągnięcia wyznaczonych celów. \cite[25-28]{klimczak2007effect}
+
+## Zarządzanie w gospodarce
+
+W odniesieniu do organizacji gospodarczych zamiast słowa zarządzanie używa się czasem terminu administracja biznesu (ang. Business Administration). Zadanie administracji biznesu ujmuje krótkie określenie: „Administracja biznesu ma zapewnić, aby zostało zrobione to, co ma być zrobione". Administracja biznesu jest dyscypliną akademicką, a szereg uniwersytetów i szkół biznesu nadaje stopień magistra z tej dyscypliny (Master of Business Administration, w skrócie MBA). \cite{Lassen2006}
+
+Na Rysunku \ref{fig-wykres} przedstawiono zmianę wartości w czasie.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{images/wykres.png}
+\caption{Zmiana wartości w czasie}\label{fig-wykres}
+\par\vspace{0.3em}
+{\footnotesize Źródło: \cite{Shotton1999}}
+\end{figure}
+
+## Przykład kodu R {#sec-r-example}
+
+Poniżej przedstawiono przykładowy kod w języku R, generujący wykres danych (@fig-r-example). Jak pokazano w równaniu @eq-przyklad, Quarto umożliwia łatwe odwoływanie się do wzorów matematycznych.
+
+```{r}
+#| label: fig-r-example
+#| fig-cap: "Przykładowy wykres wygenerowany w R"
+#| echo: true
+#| warning: false
+#| fig-width: 6
+#| fig-height: 4
+library(ggplot2)
+set.seed(42)
+dane <- data.frame(
+  x = 1:50,
+  y = cumsum(rnorm(50))
+)
+ggplot(dane, aes(x = x, y = y)) +
+  geom_line(color = "steelblue", linewidth = 1) +
+  geom_point(color = "steelblue", size = 2) +
+  labs(
+    x = "Obserwacja",
+    y = "Wartość skumulowana"
+  ) +
+  theme_minimal()
+```
+
+Powyższy kod generuje wykres błądzenia losowego (@fig-r-example), co stanowi przykład integracji kodu R z tekstem pracy dyplomowej w systemie Quarto.
