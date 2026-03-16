@@ -8,20 +8,14 @@ Stan negatywnych emocji i frustracji w niektórych kręgach akademickiej makroek
 
 Wyniki badań przedstawiono w @tbl-wyniki. Jak widać z danych zawartych w tabeli, wartości parametrów $\alpha$, $\beta$ i $\gamma$ zostały zestawione z odpowiadającymi im wynikami liczbowymi. Równanie @eq-przyklad z poprzedniego rozdziału ilustruje podstawowe operacje matematyczne możliwe do zastosowania w pracy.
 
-\begin{table}[h!]
-\centering
-\caption{Wyniki badań}\label{tbl-wyniki}
-\begin{tabular}{l|c|r}
-\textbf{Value 1} & \textbf{Value 2} & \textbf{Value 3}\\
-$\alpha$ & $\beta$ & $\gamma$ \\
-\hline
-1 & 1110.1 & a\\
-2 & 10.1 & b\\
-3 & 23.113231 & c\\
-\end{tabular}
-\par\vspace{0.3em}
-{\footnotesize Źródło: \cite{Shotton1999}}
-\end{table}
+| **Value 1** | **Value 2** | **Value 3** |
+|:------------|:-----------:|------------:|
+| $\alpha$    | $\beta$     | $\gamma$    |
+| 1           | 1110.1      | a           |
+| 2           | 10.1        | b           |
+| 3           | 23.113231   | c           |
+
+: Wyniki badań {#tbl-wyniki}
 
 ## Analiza wyników
 
@@ -36,6 +30,8 @@ Jak wspomniano w rozdziale @sec-r-example, system Quarto pozwala na integrację 
 ```{r}
 #| label: tbl-regresja
 #| tbl-cap: "Wyniki regresji liniowej"
+#| lst-label: lst-regresja
+#| lst-cap: "Regresja liniowa w R"
 #| echo: true
 dane <- data.frame(
   x = c(1, 2, 3),
@@ -49,3 +45,31 @@ knitr::kable(
 ```
 
 Wyniki regresji z @tbl-regresja wskazują na kierunek zależności między zmiennymi.
+
+## Przykład kodu Python {#sec-python-example}
+
+Quarto umożliwia również integrację kodu Python. Poniższy przykład (@fig-python-example) przedstawia wizualizację rozkładu normalnego za pomocą biblioteki `matplotlib`.
+
+```{python}
+#| label: fig-python-example
+#| fig-cap: "Rozkład normalny wygenerowany w Pythonie"
+#| lst-label: lst-python-example
+#| lst-cap: "Wizualizacja rozkładu normalnego w Pythonie"
+#| echo: true
+#| dev: pdf
+import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(42)
+dane = np.random.normal(loc=0, scale=1, size=1000)
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.hist(dane, bins=30, color="steelblue", edgecolor="white", density=True)
+x = np.linspace(-4, 4, 100)
+ax.plot(x, (1 / np.sqrt(2 * np.pi)) * np.exp(-x**2 / 2),
+        color="darkred", linewidth=2)
+ax.set_xlabel("Wartość")
+ax.set_ylabel("Gęstość")
+plt.tight_layout()
+plt.show()
+```
+
+Jak widać na @fig-python-example, histogram próby dobrze przybliża teoretyczną krzywą rozkładu normalnego.

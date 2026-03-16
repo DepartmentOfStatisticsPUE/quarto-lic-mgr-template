@@ -45,6 +45,29 @@
 \usepackage{eso-pic}
 \usepackage{changepage}
 
+% Reduce line spacing in code blocks to single spacing
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},baselinestretch=1}
+
+% List of listings (Spis programów / List of Listings)
+% Quarto already defines codelisting float and \listoflistings
+% Language-aware labels + chapter spacing in the list
+\usepackage{float}
+\usepackage{etoolbox}
+\AtBeginDocument{%
+  \iflanguage{polish}{%
+    \floatname{codelisting}{Program}%
+    \renewcommand{\listoflistings}{\listof{codelisting}{Spis programów}}%
+  }{%
+    \floatname{codelisting}{Listing}%
+    \renewcommand{\listoflistings}{\listof{codelisting}{List of Listings}}%
+  }%
+}
+% Add chapter-level spacing in .lop (list of code listings) like lof/lot have
+\makeatletter
+\pretocmd{\@chapter}{\addtocontents{lop}{\protect\addvspace{10\p@}}}{}{}
+\makeatother
+
 % Language support (babel loaded by Quarto via lang setting)
 \usepackage{csquotes}
 

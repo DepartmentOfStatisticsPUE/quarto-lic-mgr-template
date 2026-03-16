@@ -5,12 +5,13 @@ Szablon pracy licencjackiej/inżynierskiej/magisterskiej dla Uniwersytetu Ekonom
 Repozytorium zawiera dwie wersje szablonu:
 
 - `latex-template/` — oryginalny szablon LaTeX
-- `quarto-template/` — szablon Quarto (z obsługą kodu R)
+- `quarto-template/` — szablon Quarto (z obsługą kodu R i Python)
 
 ## Wymagania
 
 - [Quarto](https://quarto.org/docs/get-started/) (>= 1.3)
 - [R](https://cran.r-project.org/) (jeśli używasz kodu R w pracy)
+- [Python](https://www.python.org/) z `matplotlib` i `numpy` (jeśli używasz kodu Python)
 - TeX Live lub TinyTeX z pakietami: `carlito`, `biblatex-apa`, `hyphen-polish`
 
 ### Instalacja pakietów TeX (TinyTeX)
@@ -38,7 +39,7 @@ major: "Zarządzanie"
 lang: pl  # lub: en
 ```
 
-3. Pisz rozdziały jako pliki `.qmd` i dodawaj je do `chapters:` w `_quarto.yml`
+3. Pisz rozdziały jako pliki `.qmd` w podfolderach i dodawaj je do `chapters:` w `_quarto.yml`
 4. Renderuj:
 
 ```bash
@@ -52,17 +53,23 @@ Wynik: `_book/nazwiskoNIUtyp.pdf`
 
 ```
 quarto-template/
-├── _quarto.yml          # Konfiguracja projektu i metadane pracy
-├── index.qmd            # Wstęp
-├── rozdzial1.qmd        # Rozdział 1 (przykład z kodem R, wzorami, rysunkami)
-├── rozdzial2.qmd        # Rozdział 2 (przykład z tabelami, cytowaniami)
-├── bibliografia.bib     # Bibliografia
-├── preamble.tex         # Ustawienia LaTeX (czcionka, marginesy, nagłówki)
-├── before-body.tex      # Strona tytułowa
-├── title-page.lua       # Filtr Lua (przekazuje metadane do strony tytułowej)
-└── images/
-    ├── headerUEP.jpg    # Nagłówek UEP
-    └── wykres.png       # Przykładowy wykres
+├── _quarto.yml                     # Konfiguracja projektu i metadane pracy
+├── index.qmd                       # Wstęp
+├── .Rprofile                       # Ustawienia locale (polskie znaki w wykresach R)
+├── bibliografia.bib                # Bibliografia
+├── rozdzial1/
+│   ├── rozdzial1.qmd               # Rozdział 1 (kod R, wzory, rysunki)
+│   └── wykres.png                  # Przykładowy wykres
+├── rozdzial2/
+│   └── rozdzial2.qmd               # Rozdział 2 (tabele, cytowania, kod Python)
+├── zalacznik/
+│   └── zalacznik.qmd               # Załącznik (dodatkowe dane)
+├── config/
+│   └── preamble.tex                # Ustawienia LaTeX (czcionka, nagłówki, spisy)
+└── stronaTytulowa/
+    ├── before-body.tex             # Strona tytułowa
+    ├── title-page.lua              # Filtr Lua (metadane → strona tytułowa)
+    └── headerUEP.jpg               # Nagłówek UEP
 ```
 
 ## Formatowanie (Zarządzenie 92/2021)
@@ -78,6 +85,13 @@ quarto-template/
 | Przypisy źródłowe | 10pt |
 | Bibliografia | APA (biblatex) |
 | Numeracja stron | ciągła, na dole strony |
+
+## Spisy generowane automatycznie
+
+Szablon automatycznie generuje (w tej kolejności):
+1. **Spis tabel** / List of Tables
+2. **Spis rycin** / List of Figures
+3. **Spis programów** / List of Listings
 
 ## Przykłady użycia w plikach `.qmd`
 
@@ -100,28 +114,24 @@ $$ {#eq-regresja}
 Jak wynika z @eq-regresja ...
 ```
 
-### Tabele z odwołaniami (LaTeX)
+### Tabele (Quarto markdown)
 
-```latex
-\begin{table}[h!]
-\centering
-\caption{Tytuł tabeli}\label{tbl-nazwa}
-\begin{tabular}{l|c|r}
-...
-\end{tabular}
-\par\vspace{0.3em}
-{\footnotesize Źródło: \cite{klucz}}
-\end{table}
+```markdown
+| **Kolumna 1** | **Kolumna 2** | **Kolumna 3** |
+|:------------|:-----------:|------------:|
+| wartość     | wartość     | wartość     |
+
+: Tytuł tabeli {#tbl-nazwa}
 
 Wyniki w @tbl-nazwa pokazują ...
 ```
 
-### Rysunki z odwołaniami (LaTeX)
+### Rysunki z plikiem graficznym (LaTeX)
 
 ```latex
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\textwidth]{images/wykres.png}
+\includegraphics[width=\textwidth]{rozdzial1/wykres.png}
 \caption{Tytuł rysunku}\label{fig-nazwa}
 \par\vspace{0.3em}
 {\footnotesize Źródło: \cite{klucz}}
@@ -130,12 +140,14 @@ Wyniki w @tbl-nazwa pokazują ...
 Na Rysunku \ref{fig-nazwa} widać ...
 ```
 
-### Kod R z wykresem
+### Kod R z wykresem i spisem programów
 
 ````markdown
 ```{r}
 #| label: fig-wykres-r
 #| fig-cap: "Tytuł wykresu"
+#| lst-label: lst-wykres-r
+#| lst-cap: "Opis programu R"
 library(ggplot2)
 ggplot(dane, aes(x, y)) + geom_point()
 ```
@@ -143,13 +155,41 @@ ggplot(dane, aes(x, y)) + geom_point()
 Wyniki na @fig-wykres-r ...
 ````
 
+### Kod Python z wykresem
+
+````markdown
+```{python}
+#| label: fig-wykres-py
+#| fig-cap: "Tytuł wykresu"
+#| lst-label: lst-wykres-py
+#| lst-cap: "Opis programu Python"
+#| dev: pdf
+import matplotlib.pyplot as plt
+plt.plot([1, 2, 3], [1, 4, 9])
+plt.show()
+```
+````
+
+### Załączniki
+
+Dodaj plik `.qmd` do sekcji `appendices:` w `_quarto.yml`:
+
+```yaml
+book:
+  chapters:
+    - index.qmd
+    - rozdzial1/rozdzial1.qmd
+  appendices:
+    - zalacznik/zalacznik.qmd
+```
+
 ## Język pracy
 
 Szablon obsługuje prace w języku polskim i angielskim. Zmiana języka w `_quarto.yml`:
 
 ```yaml
-lang: pl  # polska wersja strony tytułowej (Promotor, Kierunek)
-lang: en  # angielska wersja (Thesis Supervisor, Programme)
+lang: pl  # polska wersja (Promotor, Kierunek, Spis tabel/rycin/programów)
+lang: en  # angielska wersja (Thesis Supervisor, Programme, List of Tables/Figures/Listings)
 ```
 
 Przy `lang: en` na stronie tytułowej tytuł angielski jest wyświetlany jako pierwszy.

@@ -1,0 +1,15 @@
+# Dodatkowe dane {#sec-zalacznik}
+
+Niniejszy załącznik zawiera dodatkowe dane wykorzystane w analizie przedstawionej w rozdziale @sec-python-example.
+
+W @tbl-zalacznik-dane przedstawiono pełny zestaw danych wykorzystanych w badaniu. Dane te stanowią uzupełnienie wyników zaprezentowanych w @tbl-wyniki.
+
+| **Lp.** | **Zmienna X** | **Zmienna Y** | **Kategoria** |
+|:-------:|:-------------:|:-------------:|:-------------:|
+| 1       | 10.5          | 22.3          | A             |
+| 2       | 15.2          | 31.7          | A             |
+| 3       | 8.9           | 18.1          | B             |
+| 4       | 22.1          | 45.6          | B             |
+| 5       | 12.3          | 25.4          | C             |
+
+: Dodatkowe dane badawcze {#tbl-zalacznik-dane}

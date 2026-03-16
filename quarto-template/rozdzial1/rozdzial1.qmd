@@ -20,7 +20,7 @@ Na Rysunku \ref{fig-wykres} przedstawiono zmianę wartości w czasie.
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\textwidth]{images/wykres.png}
+\includegraphics[width=\textwidth]{rozdzial1/wykres.png}
 \caption{Zmiana wartości w czasie}\label{fig-wykres}
 \par\vspace{0.3em}
 {\footnotesize Źródło: \cite{Shotton1999}}
@@ -33,6 +33,8 @@ Poniżej przedstawiono przykładowy kod w języku R, generujący wykres danych (
 ```{r}
 #| label: fig-r-example
 #| fig-cap: "Przykładowy wykres wygenerowany w R"
+#| lst-label: lst-r-example
+#| lst-cap: "Generowanie wykresu w R"
 #| echo: true
 #| warning: false
 #| fig-width: 6

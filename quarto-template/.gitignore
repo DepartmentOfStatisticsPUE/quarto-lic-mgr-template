@@ -1,0 +1,12 @@
+/.quarto/
+/_book/
+*.log
+*.blg
+*.bbl
+*.bcf
+*.lof
+*.lot
+*.lop
+*.aux
+*.run.xml
+*.toc

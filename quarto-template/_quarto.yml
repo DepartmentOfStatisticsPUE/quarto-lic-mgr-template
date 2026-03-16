@@ -12,8 +12,10 @@ book:
   output-file: "kowalska1234lic"
   chapters:
     - index.qmd
-    - rozdzial1.qmd
-    - rozdzial2.qmd
+    - rozdzial1/rozdzial1.qmd
+    - rozdzial2/rozdzial2.qmd
+  appendices:
+    - zalacznik/zalacznik.qmd
 
 # ──── KONFIGURACJA PRACY / THESIS CONFIGURATION ────
 # Proszę uzupełnić poniższe pola / Please fill in the fields below
@@ -42,10 +44,10 @@ format:
     pdf-engine: xelatex
     cite-method: biblatex
     biblatexoptions: [style=apa, backend=biber, alldates=year]
-    include-in-header: preamble.tex
-    include-before-body: before-body.tex
+    include-in-header: config/preamble.tex
+    include-before-body: stronaTytulowa/before-body.tex
     filters:
-      - title-page.lua
+      - stronaTytulowa/title-page.lua
     geometry:
       - top=2.5cm
       - bottom=2.5cm
@@ -54,8 +56,8 @@ format:
     linestretch: 1.5
     fontsize: 12pt
     toc: false
-    lof: true
-    lot: true
+    lof: false
+    lot: false
     number-sections: true
 
 bibliography: bibliografia.bib
